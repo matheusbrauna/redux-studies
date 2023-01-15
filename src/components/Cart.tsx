@@ -16,12 +16,12 @@ export function Cart() {
       </thead>
 
       <tbody>
-        {items.map((product, index) => (
-          <tr key={index}>
+        {items.map(({ product, quantity }, index) => (
+          <tr key={product.id}>
             <td>{product.title}</td>
             <td>{product.price}</td>
-            <td>{product.quantity}</td>
-            <td>{product.price * product.quantity}</td>
+            <td>{quantity}</td>
+            <td>{product.price * quantity}</td>
           </tr>
         ))}
       </tbody>

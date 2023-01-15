@@ -13,12 +13,12 @@ export const cartSlice = createSlice({
     addProductToCart: (state, action) => {
       const { product } = action.payload
       const existingProductIndex = state.items.findIndex(
-        (item) => item.id === product.id,
+        (item) => item.product.id === product.id,
       )
       if (existingProductIndex !== -1) {
         state.items[existingProductIndex].quantity += 1
       } else {
-        state.items.push({ ...product, quantity: 1 })
+        state.items.push({ product, quantity: 1 })
       }
     },
   },
