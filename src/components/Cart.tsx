@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '../store'
-import { ICartItem } from '../store/modules/cart/types'
 
 export function Cart() {
-  const cart = useSelector<RootState, ICartItem[]>((state) => state.cart.items)
+  const { items } = useSelector((state: RootState) => state.cart)
 
   return (
     <table>
@@ -17,12 +16,12 @@ export function Cart() {
       </thead>
 
       <tbody>
-        {cart.map(({ product, quantity }) => (
-          <tr key={product.id}>
+        {items.map((product, index) => (
+          <tr key={index}>
             <td>{product.title}</td>
             <td>{product.price}</td>
-            <td>{quantity}</td>
-            <td>{product.price * quantity}</td>
+            <td>{product.quantity}</td>
+            <td>{product.price * product.quantity}</td>
           </tr>
         ))}
       </tbody>

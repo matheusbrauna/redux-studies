@@ -1,21 +1,10 @@
-import { applyMiddleware, createStore } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import { ICartState } from './modules/cart/types'
-import rootReducer from './modules/rootReducer'
-import createSagaMiddleware from 'redux-saga'
-import rootSaga from './modules/rootSaga'
+import { configureStore } from '@reduxjs/toolkit'
+import { cartSlice } from './slices/cart-slice'
 
-export interface RootState {
-  cart: ICartState
-}
+export const store = configureStore({
+  reducer: {
+    cart: cartSlice.reducer,
+  },
+})
 
-const sagaMiddleware = createSagaMiddleware()
-
-const middlewares = [sagaMiddleware]
-
-export const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(...middlewares)),
-)
-
-sagaMiddleware.run(rootSaga)
+export type RootState = ReturnType<typeof store.getState>

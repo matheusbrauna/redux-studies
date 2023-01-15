@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { api } from '../lib/api'
-import { IProduct } from '../store/modules/cart/types'
+import { IProduct } from '../store/@types/cart'
 import { CatalogItem } from './CatalogItem'
 
 export function Catalog() {
@@ -16,12 +16,14 @@ export function Catalog() {
     fetchCatalog()
   }, [])
 
+  console.log(catalog)
+
   return (
     <main>
       <h1>Catalog</h1>
 
-      {catalog.map((product) => (
-        <CatalogItem key={product.id} product={product} />
+      {catalog.map((product, index) => (
+        <CatalogItem key={index} product={product} />
       ))}
     </main>
   )
